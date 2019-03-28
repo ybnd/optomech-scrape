@@ -3,3 +3,5 @@ lxml>=3.4.4
 fuzzywuzzy>=0.17.0
 pandas>=0.23.4
 python-Levenshtein-wheels>=0.13.1
+pyinstaller>=3.4
+pywin32; platform_system == "Windows"
