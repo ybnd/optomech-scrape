@@ -6,7 +6,7 @@ Query price and information on optical & optomechanical components by vendor and
 
 ```python
 from optomech_scrape import part
-part('Thorlabs ER3-P4')
+part('Thorlabs ER4-P4')
 
 >>> ('Thorlabs', 'ER4-P4', {'title': 'Cage Assembly Rod, 4" Long, Ø6 mm, 4 Pack', 'price': '€24.52'}, 'https://www.thorlabs.com/thorproduct.cfm?partnumber=ER4-P4')
 ```
