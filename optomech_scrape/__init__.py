@@ -4,7 +4,7 @@ import re
 from io import StringIO
 import warnings
 import time
-from typing import Tuple, Any, Type
+from typing import Tuple, Any
 
 from fuzzywuzzy import fuzz
 
@@ -110,7 +110,7 @@ class Thorlabs(Vendor):
     @classmethod
     def valid_part(cls, part: str) -> bool:
         if re.match(cls.__part_pattern__, part) is not None:
-            if part[-2:] == '-M': # 'unfixed' part number
+            if part[-2:] == '-M':  # 'unfixed' part number
                 cls.warn_metric(part)
                 return False
             else:
@@ -153,7 +153,7 @@ class EdmundOptics(Vendor):
 
     @classmethod
     def url(cls, part: str) -> str:
-        # ommit # from part number in the url - assuming that's the first character!
+        # omit # from part number in the url - assuming that's the first character!
         return f"https://www.edmundoptics.com/search/?criteria={part[1:]}"
 
     @classmethod
@@ -203,6 +203,3 @@ def parse(part: str) -> Tuple[str, str, dict, str]:
         part = vendor.part(part)
 
         return vendor.__name__, part, vendor.get_info(part), vendor.url(part)
-
-
-

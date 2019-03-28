@@ -1,5 +1,4 @@
-from optomech import parse
-import argparse
+from optomech_scrape import parse
 import pandas as pd
 
 # parser = argparse.ArgumentParser()
@@ -17,8 +16,8 @@ if __name__ == '__main__':
     )
 
     for i in range(len(data_in)):
-        id = data_in.iloc[i]['Part name']
-        vendor, part, info, url = parse(id)
+        part_id = data_in.iloc[i]['Part name']
+        vendor, part, info, url = parse(part_id)
 
         if info is not None:
             try:
@@ -30,7 +29,7 @@ if __name__ == '__main__':
             title = '?'
             unit_price = '?'
 
-        print(f"{i+1}/{len(data_in)}: {id} -> {vendor} {part}")
+        print(f"{i+1}/{len(data_in)}: {part_id} -> {vendor} {part}")
 
         notes = data_in.iloc[i]['Description']
 
@@ -39,7 +38,7 @@ if __name__ == '__main__':
 
         row = {
             'Vendor': vendor, 'Part': part, 'Unit Price': unit_price, 'URL': url,
-            'id': id, 'Quantity': data_in.iloc[i]['Quantity'],
+            'id': part_id, 'Quantity': data_in.iloc[i]['Quantity'],
             'Title': title, 'Notes': notes
         }
 

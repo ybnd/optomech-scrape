@@ -1,5 +1,5 @@
 import unittest
-from optomech import *
+from optomech_scrape import *
 
 
 class ThorlabsPartNumberTest(unittest.TestCase):
@@ -64,25 +64,4 @@ class ThorlabsPriceRequestTest(unittest.TestCase):
     def test_nonexistent(self):
         self.assertEqual(
             Thorlabs.get_info('SCP01T-M')['price'], None
-        )
-
-
-class EdmundOpticsPriceRequestTest(unittest.TestCase):
-    def test_iris(self):
-        self.assertEqual(
-            EdmundOptics.get_info('#42-123')['price'], '(!) $50.0'
-        )
-
-
-class InferVendorPriceRequestTest(unittest.TestCase):
-    def test_stage(self):
-        _, _, info, _ = parse('Thorlabs LNR25ZFS-M')
-        self.assertEqual(
-            info['price'], '€1612.03'
-        )
-
-    def test_xy(self):
-        _, _, info, _ = parse('EdmundOptics #89-364')
-        self.assertEqual(
-            info['price'], '(!) $5500.0'
         )
