@@ -26,7 +26,7 @@ def request(vendor, url) -> Tuple[lxml.html.HtmlElement, Any]:  # todo: correctl
 
 class Vendor:
     """ Subclassed to define specific vendors """
-    __REQUEST_INTERVAL__ = 1
+    __REQUEST_INTERVAL__ = 0
     __LAST_REQUEST__ = 0
 
     __part_pattern__ = re.compile('!')      # placeholder regex
