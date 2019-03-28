@@ -20,5 +20,5 @@ part('Thorlabs ER3-P4')
 
 This code is intended to help gathering pricing for limited amounts of parts from a bill of materials. It is not the authors intention to write automated crawlers to copy any of the vendors' databases or to cause excessive server load. 
 
-Please [contact me](ybnd@tuta.io) with any questions or remarks.
+Please contact me with any questions or remarks.
 
