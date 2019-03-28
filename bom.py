@@ -1,10 +1,6 @@
 from optomech_scrape import part
 import pandas as pd
 
-# parser = argparse.ArgumentParser()
-#
-# parser.add_argument('-file', type=str)
-
 
 if __name__ == '__main__':
     file_in = 'D:/Box Sync/Setup/190327 - update bom1.csv'
@@ -17,7 +13,7 @@ if __name__ == '__main__':
 
     for i in range(len(data_in)):
         part_id = data_in.iloc[i]['Part name']
-        vendor, part, info, url = part(part_id)
+        vendor, part_number, info, url = part(part_id)
 
         if info is not None:
             try:
@@ -29,7 +25,7 @@ if __name__ == '__main__':
             title = '?'
             unit_price = '?'
 
-        print(f"{i+1}/{len(data_in)}: {part_id} -> {vendor} {part}")
+        print(f"{i+1}/{len(data_in)}: {part_id} -> {vendor} {part_number}")
 
         notes = data_in.iloc[i]['Description']
 
@@ -37,7 +33,7 @@ if __name__ == '__main__':
             notes = ''
 
         row = {
-            'Vendor': vendor, 'Part': part, 'Unit Price': unit_price, 'URL': url,
+            'Vendor': vendor, 'Part': part_number, 'Unit Price': unit_price, 'URL': url,
             'id': part_id, 'Quantity': data_in.iloc[i]['Quantity'],
             'Title': title, 'Notes': notes
         }
