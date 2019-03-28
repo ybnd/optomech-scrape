@@ -1,4 +1,4 @@
-from optomech_scrape import parse
+from optomech_scrape import part
 import pandas as pd
 
 # parser = argparse.ArgumentParser()
@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     for i in range(len(data_in)):
         part_id = data_in.iloc[i]['Part name']
-        vendor, part, info, url = parse(part_id)
+        vendor, part, info, url = part(part_id)
 
         if info is not None:
             try:

@@ -153,7 +153,8 @@ class EdmundOptics(Vendor):
 
     @classmethod
     def url(cls, part: str) -> str:
-        # omit # from part number in the url - assuming that's the first character!
+        # Omit # from part number in the url - assuming that's the first character!
+        # Don't really need to do this with regex, part pattern should have been checked already.
         return f"https://www.edmundoptics.com/search/?criteria={part[1:]}"
 
     @classmethod
@@ -176,6 +177,7 @@ class EdmundOptics(Vendor):
 
 
 class Newport(Vendor):
+    # todo: not as straightforward to get price / info from DOM...
 
     __part_pattern__ = re.compile('^$')
 
@@ -188,18 +190,20 @@ class Newport(Vendor):
         pass
 
 
-def parse(part: str) -> Tuple[str, str, dict, str]:
+def part(part_id: str) -> Tuple[str, str, dict, str]:
+    """ Returns part information from a part_id as <VENDOR> <PART NUMBER>  """
+
     vendors = (Thorlabs, EdmundOptics, Newport)
 
     match = []
     for v in vendors:
-        match.append(fuzz.partial_ratio(v.__name__, part))
+        match.append(fuzz.partial_ratio(v.__name__, part_id))
 
     if max(match) < 75:
-        return '?', part, {}, '?'
+        return '?', part_id, {}, '?'
     else:
         vendor = vendors[match.index(max(match))]
 
-        part = vendor.part(part)
+        part_id = vendor.part(part_id)
 
-        return vendor.__name__, part, vendor.get_info(part), vendor.url(part)
+        return vendor.__name__, part_id, vendor.get_info(part_id), vendor.url(part_id)
